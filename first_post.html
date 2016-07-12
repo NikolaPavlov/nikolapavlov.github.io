@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Test site</title>
+        <title>first_post</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -14,7 +14,8 @@
         <header id="banner" class="body">
                 <h1><a href="/">Test site </a></h1>
                 <nav><ul>
-                    <li><a href="/category/ctf.html">CTF</a></li>
+                    <li><a href="/category/about.html">About</a></li>
+                    <li class="active"><a href="/category/ctf.html">CTF</a></li>
                     <li><a href="/category/review.html">Review</a></li>
                 </ul>
 <form id="search" action"#" onsubmit="javascript:window.open('https://duckduckgo.com/?q='+document.getElementById('keywords').value+'+site:');">
@@ -23,16 +24,27 @@
                 </nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
-<h1>Archives for Test site</h1>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/first_post.html" rel="bookmark"
+           title="Permalink to first_post">first_post</a></h1>
+    </header>
 
-<dl>
-    <dt>Fri 03 December 2010</dt>
-    <dd><a href="/first-post.html">first post</a></dd>
-    <dt>Fri 03 December 2010</dt>
-    <dd><a href="/my-first-review.html">My First Review</a></dd>
-    <dt>Fri 03 December 2010</dt>
-    <dd><a href="/this-is-is-the-second-post.html">this is is the second post</a></dd>
-</dl>
+    <div class="entry-content">
+<footer class="post-info">
+        <span>Sat 13 December 2014</span>
+
+</footer><!-- /.post-info -->      <p>Hello World from Pelican!</p>
+<p>This is a simple example:</p>
+<pre class="literal-block">
+import math
+print 'import done'
+</pre>
+
+    </div><!-- /.entry-content -->
+
+  </article>
 </section>
         <section id="extras" class="body">
                 <div class="blogroll">
@@ -42,6 +54,14 @@
                             <li><a href="#">Jinja2</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">this is social link</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
         </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
