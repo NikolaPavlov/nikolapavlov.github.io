@@ -30,21 +30,51 @@
 <footer class="post-info">
         <span>Wed 13 July 2016</span>
 
-</footer><!-- /.post-info -->      <p><strong>First lets find the target in our network:</strong></p>
+</footer><!-- /.post-info -->      <p>First lets find the target in our network:</p>
 <p><img alt="netdiscover target" src="images/1_netdiscover.png" /></p>
-<p><strong>Our target machine is 10.0.0.135, lets run nmap scan on it:</strong></p>
+<p>Our target machine is 10.0.0.135, lets run nmap scan on it:</p>
 <p><img alt="nmap scan target" src="images/2_nmap.png" /></p>
 <p>Nothing interesting just web server, and close ssh port 22.
-Brouse the target and run nikto on the web server.</p>
-<p><img alt="nikto scan target" src="images/3_nikto.png" /></p>
-<p>From nikto scan we found robots.txt file on the server:</p>
+Browse the target and run nikto on the web server.</p>
+<p><img alt="nikto scan target" src="images/3_nikto.png" />
+The site is wordpress. The interesting things are in red.</p>
+<p>Spidering the site from Owasp Zap and found robots.txt:</p>
 <p><img alt="robots.txt on target" src="images/4_robots_txt.png" /></p>
 <p>We are able to locate the first of three keys :)</p>
 <p><img alt="first key is found" src="images/5_first_key.png" /></p>
-<p>Exploring after nikto scan, and in license.txt we found some encrypt text</p>
+<p>Exploring after nikto scan, and in license.txt we found some encrypt text,
+thanks to firebug. The text was hidden on the bottom of the page after long
+blank space.</p>
 <p><img alt="found encrypted text" src="images/6_license_txt_key.png" /></p>
-<p>Use Zap to decypt the previously found txt:</p>
+<p>Run the encrypted text through HashID but I can't determine it's type. Then I 
+decide to try it in Owasp Zap, and decrypt it as base64:</p>
 <p><img alt="zap decrypt txt" src="images/7_zap_decode_hash.png" /></p>
+<p>This is the username:password. I tried to log in with this credentials and
+this is the result:</p>
+<p><img alt="" src="images/8_in_the_wp.png" /></p>
+<p>We are successfully log in to the admin panel. Now I think about how to upload
+reverse shell. We know that WordPress is Php based, so I decide to upload php
+reverse shell in the footer of the theme:</p>
+<p><img alt="" src="images/9_upload_shell.png" /></p>
+<p>Catching the reverse shell with ncat and we are daemon on the target machine:</p>
+<p><img alt="" src="images/10_catch_reverse_shell.png" /></p>
+<p>After looking around I locate the second key. But we weren't able to read it
+because of permissions.</p>
+<p><img alt="" src="images/11_locate_second_key.png" /></p>
+<p>Let's try to crack the freshly found md5 hash. I didn't want to fire up John
+for this, so i ended up looking online at crackstation for decrypt it. The
+    password is the alphabet.</p>
+<p><img alt="" src="images/12_crack_md5.png" /></p>
+<p>Now I try to log in as SU but my shell didn't allow me to do that, perhaps i
+need to spawn /bin/bash:</p>
+<p><img alt="" src="images/13_cant_su.png" /></p>
+<p>So i upgrade the shell with this python script, and log in successfully as
+robot user:</p>
+<p><img alt="" src="images/14_upgrade_shell_with_py.png" /></p>
+<p>Now we can read the second key:</p>
+<p><img alt="" src="images/15_key2found.png" /></p>
+<p>I can't find the last key for now ... Probably i will need root access to the
+target machine, but for now didn't find a way to obtain it.</p>
     </div><!-- /.entry-content -->
 
   </article>
@@ -61,9 +91,9 @@ Brouse the target and run nikto on the web server.</p>
                         <h2>social</h2>
                         <ul>
 
-                            <li><a href="www.facebook.com/np">facebook</a></li>
-                            <li><a href="www.github.com/np">github</a></li>
-                            <li><a href="www.twitter.com/np">twitter</a></li>
+                            <li><a href=""></a></li>
+                            <li><a href="https://github.com/NikolaPavlov/">github</a></li>
+                            <li><a href="www.twitter.com/gggg">twitter</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
