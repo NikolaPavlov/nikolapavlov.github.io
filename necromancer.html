@@ -14,7 +14,7 @@
         <header id="banner" class="body">
                 <h1><a href="/">InfoSec CTF </a></h1>
                 <nav><ul>
-                    <li class="active"><a href="/category/ctf.html">CTF</a></li>
+                    <li class="active"><a href="/category/vulnhub-ctf.html">VulnHub CTF</a></li>
                 </ul>
                 </nav>
         </header><!-- /#banner -->
@@ -32,6 +32,7 @@
 
 </footer><!-- /.post-info -->      <p><strong>This is a Necromancer challenge from vulnhub.com. You can obtain the virtual
 machine from: <a href="https://www.vulnhub.com/entry/the-necromancer-1,154/">here</a></strong></p>
+<h1><strong><em>Day1</em></strong></h1>
 <p>We found our target with:</p>
 <div class="highlight"><pre><span></span>netdiscover -r 10.0.0.1/24
 </pre></div>
@@ -91,6 +92,33 @@ found what I searched:
 <img alt="" src="images/Necromancer/7_wfuzz_found_talisman.png" />
 We found talisman :) At first it's look like binary file. Stucked again! So i
 decide to go to sleep and fight tomorrow witch a fresh head.</p>
+<h1><strong><em>Day2</em></strong></h1>
+<p>So after I sllep for a while I start fighting again on the next day with fresh 
+head. After half a day I'm ready to post how i got flag 4:
+This is the properties of talisman file:</p>
+<p><img alt="" src="images/Necromancer/7_1_talisman_prop.png" />
+After I left no stone unturned found this interesting functions in the file:
+<img alt="" src="images/Necromancer/7_2_talisman_functions.png" />
+Next i learn how to use gdb, i guess that's going to be useful in the future :)
+Confirm the file contains this two functions:
+<img alt="" src="images/Necromancer/8_gdb_debugging1.png" />
+Hithing the chantToBreakSpell function with the debugger:
+<img alt="" src="images/Necromancer/8_gdb_debugging_find_flag.png" />
+<strong>flag4{ea50536158db50247e110a6c89fcf3d3}:blackmagic</strong>
+With the flag4 we recieved instructions to send the decrypted flag4 to udp 
+31337:
+<img alt="" src="images/Necromancer/9_found_flag5.png" />
+We found <strong>flag5{0766c36577af58e15545f099a3b15e60}:809472671</strong> and directory
+/thenecromancerwillabsorbyoursoul let's visit it:
+<img alt="" src="images/Necromancer/10_found_flag6.png" />
+In the /thenecromancerwillabsorbyoursoul at the top of the page just like that
+we found  <strong>flag6{b1c3ed8f1db4258e4dcb0ce565f6dc03}:1756462165</strong>.And on the
+bottom necromancer file. It's bzip2 file, after unzip it we ended up with pcap
+file. I look at the file with wireshark it's look like contains some type of
+wireless traffic. Look at the file for more than a hour and finally decide to take
+break and continue tomorrow. So this is the end of day two. I learned alot about
+how to decompile and debug binary files. I guess tomorrow will learn alot about
+wireless traffic :).</p>
     </div><!-- /.entry-content -->
 
   </article>
@@ -109,7 +137,7 @@ decide to go to sleep and fight tomorrow witch a fresh head.</p>
 
                             <li><a href=""></a></li>
                             <li><a href="https://github.com/NikolaPavlov/">github</a></li>
-                            <li><a href="www.twitter.com/gggg">twitter</a></li>
+                            <li><a href="https://twitter.com/n_pavlov1955">twitter</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
