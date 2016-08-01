@@ -131,7 +131,8 @@ encoding so I switch to wfuzz with:</p>
 
 <p>We found the dropbox files:
 <img alt="" src="images/TommyPics/15_dropbox_found.png" />
-<!-- TODO:flag3 --></p>
+<!-- TODO:flag3 -->
+<strong>Third flag found: Flag data: TinyHead</strong></p>
 <p>It's time to create custom dictonary with the hints from hint.txt</p>
 <ul>
 <li>
@@ -158,13 +159,52 @@ encoding so I switch to wfuzz with:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">exrex</span>
 
 
-<span class="n">regex</span><span class="o">=</span><span class="s1">&#39;bev[A-Z][1-9]{2}[a-z]{2}[!@#]1995&#39;</span>
+<span class="n">output_file</span><span class="o">=</span><span class="s1">&#39;dict.lst&#39;</span>
+<span class="n">regex</span><span class="o">=</span><span class="s1">&#39;bev[A-Z][0-9]{2}[a-z]{2}[`~!@#$%^&amp;*()_+}{|&quot;:;.,/?&gt;&lt;</span><span class="se">\&#39;</span><span class="s1">]1995&#39;</span>
+<span class="n">generated_strings</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">exrex</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">regex</span><span class="p">))</span>
 
-<span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">exrex</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">regex</span><span class="p">))))</span>
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="k">for</span> <span class="nb">str</span> <span class="ow">in</span> <span class="n">generated_strings</span><span class="p">:</span>
+      <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
+
+
+<p><img alt="" src="images/TommyPics/16_fcrack.png" /></p>
+<p>This is the content of the zip password protected file:
+<img alt="" src="images/TommyPics/17_passes_open.png" /></p>
+<ul>
+<li>
+<p>The password for Callahan Auto Server isn't complete, there is more numbers at
+  the end</p>
+</li>
+<li>
+<p>Probably information about these numbers is in the company blog</p>
+</li>
+</ul>
+<p>At this point we can generate another password list with fatguyinalittlecoat and
+numbers at the end and try to bruteforce the ssh account on the target. But we
+could also look at the blog more carfully. Lets enumerate users on the company
+blog:
+<img alt="" src="images/TommyPics/18_enumerate.png" /></p>
+<p>It's look like the account which we need is 'tom' so lets bruteforce the
+wordpress login of Big Tom.</p>
+<div class="highlight"><pre><span></span>wpscan --username tom --wordlist ~/Downloads/Wordlists/rockyou.txt --url http://10.0.0.139/prehistoricforest/
+</pre></div>
+
+
+<p><img alt="" src="images/TommyPics/19_wp_login_found.png" /></p>
+<p>On the wordpress panel this is what we found:
+<img alt="" src="images/TommyPics/20_tom_panel.png" /></p>
+<p>It's look like the password is <strong>fatguyinalittlecoat1938!!</strong>
+Lets try to ssh with <strong>bigtommysenior:fatguyinalittlecoat1938!!</strong></p>
+<p><img alt="" src="images/TommyPics/21_ssh_in.png" />
+wot wot !!! :) 
+<strong>Four flag found: Flag data: EditButton</strong></p>
+<p>In the flag four we obtained important information:</p>
+<blockquote>
+<p>But...but...where's flag 5?<br />
+I'll make it easy on you.  It's in the root of this server at /5.txt</p>
+</blockquote>
     </div><!-- /.entry-content -->
 
   </article>
