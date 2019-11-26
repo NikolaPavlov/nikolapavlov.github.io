@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Bloging With Pelican
+        <title>    Blogging With Pelican and publishing on GitHub Pages
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -51,11 +51,53 @@
                         <time class="post-time" datetime="2019-11-27T10:20:00+02:00" pubdate>
                             Wed 27 November 2019
                         </time>
-                        <a href="/bloging-with-pelican.html" rel="bookmark"><h1>Bloging With Pelican</h1></a>
+                        <a href="/bloging-with-pelican.html" rel="bookmark"><h1>Blogging With Pelican and publishing on GitHub Pages</h1></a>
                     </header>
 
                     <section class="post-content">
-                        <p>Bloging with Pelican, because hey it has .rst support.</p>
+                        <p>Blogging with Pelican, because hey it has .rst support, it's written in Python and it has the biggest number of stars on
+GitHub.</p>
+<p>Why Pelican:</p>
+<blockquote>
+<ul class="simple">
+<li>You writing .rst Pelican transfer this into HTML, COOL</li>
+<li>It's fast because it's static, no database</li>
+<li>Hosting it's cheap, because it's FREE, GitHub Pages</li>
+<li>It's Python</li>
+</ul>
+</blockquote>
+<ol class="arabic">
+<li><p class="first">Install Pelican.
+I'm installing it globally with my package manager but feel free to put it into separate virtual environment if you
+want.</p>
+</li>
+<li><p class="first">Scaffolding the project:
+pelican-quickstart</p>
+</li>
+<li><p class="first">Set up settings pelicanconf.py Use the documentations for reference:
+..  _PelicanDocumentation: <a class="reference external" href="https://docs.getpelican.com/en/stable/">https://docs.getpelican.com/en/stable/</a></p>
+<dl class="docutils">
+<dt>Important setting for us is:</dt>
+<dd><p class="first last">OUTPUT_PATH=''</p>
+</dd>
+</dl>
+<p>We use this setting to tell Pelican where to output the generated HTML files. In our case is pretty convenient this
+to be our GitHub Pages Repository. Because of this setting we can delete the default output folder generated from the
+scaffolding.</p>
+</li>
+<li><p class="first">We can use non-default theme downloaded in our root project, in our case in the theme folder. The theme location is
+referenced in the pelicanconf.py</p>
+</li>
+<li><p class="first">We write content in .rst format in the /content folder.</p>
+</li>
+<li><p class="first">Generation of the HTML is done with 'pelican content'. That put the HTML files in our GitHub Pages repo
+previously set up in pelicanconf.py</p>
+</li>
+<li><p class="first">Go to this GitHub Pages repo and push to GitHub.</p>
+</li>
+<li><p class="first">You are live.</p>
+</li>
+</ol>
 
                     </section>
                     <hr/>
